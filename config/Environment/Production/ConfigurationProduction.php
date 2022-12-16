@@ -13,7 +13,7 @@ class ConfigurationProduction extends ConfigurationGlobal {
             'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
             'database' => 'mallekr',
             'login' => 'mallekr',
-            'password' => '02092002'
+            'password' => 'root'
         ]
     ];
 
