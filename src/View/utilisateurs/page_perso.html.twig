@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}Page de {{ utilisateur.getLogin() }}{% endblock page_title %}
+
+{% block page_content %}
+    <main id="the-feed-main">
+        <div id="feed">
+            {% if publications %}
+                {% for publication in publications %}
+                    <div class="feedy">
+                        <div class="feedy-header">
+                            <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ publication.getUtilisateur().getProfilePictureName()) }}" alt="avatar de l'utilisateur">
+                            <div class="feedy-info">
+                                <span>{{ publication.getUtilisateur().getLogin() }}</span>
+                                <span> - </span>
+                                <span>{{ publication.getDateFormatee() }}</span>
+                                <p>{{ publication.getMessage() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p id="no-publications" class="center">Pas de publications pour le moment!</p>
+            {% endif %}
+        </div>
+    </main>
+{% endblock page_content %}

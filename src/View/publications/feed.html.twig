@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}The Feed{% endblock page_title %}
+{% block page_content %}
+
+<main id="the-feed-main">
+  <div id="feed">
+    {%  if session.get('id') %}
+      <form id="feedy-new" action="{{ route('app_submit_feedy') }}" method="post">
+          <fieldset>
+              <legend>Nouveau feedy</legend>
+              <div>
+                  <textarea minlength="1" maxlength="250" placeholder="Qu'avez-vous en tête?" name="message" required></textarea>
+              </div>
+              <div>
+                  <input id="feedy-new-submit" type="submit" value="Feeder!">
+              </div>
+          </fieldset>
+      </form>
+    {% endif %}
+      {%  if publications %}
+        {% for publication in publications %}
+            <div class="feedy">
+                <div class="feedy-header">
+                    <a href="{{ route("app_page_perso", {"idUtilisateur": publication.getUtilisateur().getIdUtilisateur()}) }}">
+                      <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ publication.getUtilisateur().getProfilePictureName()) }}" alt="avatar de l'utilisateur">
+                    </a>
+                    <div class="feedy-info">
+                        <span>{{ publication.getUtilisateur().getLogin() }}</span>
+                        <span> - </span>
+                        <span>{{ publication.getDateFormatee() }}</span>
+                        <p>{{ publication.getMessage() }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      {% else %}
+        <p id="no-publications" class="center">Pas de publications pour le moment!</p>
+      {% endif %}
+  </div>
+</main>
+{% endblock page_content %}

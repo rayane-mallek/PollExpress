@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>{% block page_title %}{% endblock page_title %}</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href=" {{ asset('css/styles.css') }}">
+</head>
+<body>
+  <header>
+    <div id="titre" class="center">
+        <a href="{{route('app_feed')}}"><span>The Feed</span></a>
+        <nav>
+              <a href="{{ route("app_feed") }}">Accueil</a>
+              {%  if session.get('id') %}
+                <a href="{{ route("app_page_perso", {"idUtilisateur": session.get('id')}) }}">Ma page</a>
+                <a href="{{ route("app_submit_deconnexion") }}">Déconnexion</a>
+              {% else %}
+                <a href="{{ route("app_inscription") }}">Inscription</a>
+                <a href="{{ route("app_connexion") }}">Connexion</a>
+              {% endif %}
+        </nav>
+    </div>
+  </header>
+     
+  <div id="flashes-container">
+  {% for flash in session.consumeFlashes('success') %}
+      <span class="flashes flashes-success">{{ flash }}</span>
+  {% endfor %}
+  {% for flash in session.consumeFlashes('error') %}
+      <span class="flashes flashes-error">{{ flash }}</span>
+  {% endfor %}
+  </div>
+   
+  {% block page_content %}{% endblock page_content %}
+</body>
+</html>
