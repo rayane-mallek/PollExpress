@@ -19,6 +19,8 @@ use Symfony\Component\HttpKernel\Controller\ContainerControllerResolver;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+//use Symfony\Component\Yaml\Yaml;
+//$config = Yaml::parseFile('config.yml');
 
 class AppInitializer {
 

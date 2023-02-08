@@ -1,0 +1,8 @@
+repositoryManager:
+  manager: RepositoryManagerMySQL::class
+  dataSourceParameters:
+    hostname: webinfo.iutmontp.univ-montp2.fr
+    database: mallekr
+    login: mallekr
+    password: root
+debug: false

@@ -1,0 +1,76 @@
+appRoot: __DIR__/../src
+views: View
+repositories:
+  TheFeed\Business\Entity\Publication: TheFeed\Storage\SQL\PublicationRepositorySQL
+  TheFeed\Business\Entity\Utilisateur: TheFeed\Storage\SQL\UtilisateurRepositorySQL
+controllers:
+  publication_controller: TheFeed\Application\PublicationController
+  utilisateur_controller: TheFeed\Application\UtilisateurController
+routes:
+  app_feed:
+    path: '/'
+    parameters:
+      _controller: publication_controller::feed
+    methods:
+      - GET
+  app_submit_feedy:
+    path: '/feedy'
+    parameters:
+      _controller: publication_controller::submitFeedy
+    methods:
+      - POST
+  app_inscription:
+    path: '/inscription'
+    parameters:
+      _controller: utilisateur_controller::getInscription
+    methods:
+      - GET
+  app_submit_inscription:
+    path: '/inscription'
+    parameters:
+      _controller: utilisateur_controller::submitInscription
+    methods:
+      - POST
+  app_connexion:
+    path: '/connexion'
+    parameters:
+      _controller: utilisateur_controller::getConnexion
+    methods:
+      - GET
+  app_submit_connexion:
+    path: '/connexion'
+    parameters:
+      _controller: utilisateur_controller::submitConnexion
+    methods:
+      - POST
+  app_submit_deconnexion:
+    path: '/deconnexion'
+    parameters:
+      _controller: utilisateur_controller::submitDeconnexion
+    methods:
+      - GET
+  app_page_perso:
+    path: '/utilisateurs/page/{idUtilisateur}'
+    parameters:
+      _controller: utilisateur_controller::getPagePerso
+      idUtilisateur: null
+    methods:
+      - GET
+
+parameters:
+  salt: dejgkerhgerlk:;ghù§hj;dsf
+  profilePictures: __DIR__/../web/assets/img/utilisateurs
+listeners:
+  - framework_listener
+services:
+  publication_service:
+    class: TheFeed\Business\Services\PublicationService
+    arguments:
+      - "@repository_manager"
+  utilisateur_service:
+    class: TheFeed\Business\Services\UtilisateurService
+    arguments:
+      - "@repository_manager"
+      - "%salt%"
+      - "%profilePictures%"
+      - "@session_manager"
