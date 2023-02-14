@@ -37,7 +37,7 @@ class ConfigurationGlobal {
         "app_feed" => [
             "path" => '/',
             "parameters" => [
-               "_controller" => "publication_controller::feed",
+               "_controller" => "sondage_controller::listSondages",
             ],
             "methods" => ["GET"]
         ],

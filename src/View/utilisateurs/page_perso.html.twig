@@ -24,31 +24,6 @@
                 <p id="no-publications" class="center">Pas de sondages pour le moment</p>
             {% endif %}
 
-
-
-            {% if publications %}
-                <p id="no-publications" class="center">Mes feedies</p>
-
-                {% for publication in publications %}
-                    <div class="feedy">
-                        <div class="feedy-header">
-                            <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ publication.getUtilisateur().getProfilePictureName()) }}" alt="avatar de l'utilisateur">
-                            <div class="feedy-info">
-                                <span>{{ publication.getUtilisateur().getLogin() }}</span>
-                                <span> - </span>
-                                <span>{{ publication.getDateFormatee() }}</span>
-                                <p>{{ publication.getMessage() }}</p>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p id="no-publications" class="center">Pas de publications pour le moment!</p>
-            {% endif %}
-
-
-
-
         </div>
     </main>
 {% endblock page_content %}
