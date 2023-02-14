@@ -1,6 +1,0 @@
-repositoryManager:
-  manager: RepositoryManagerSQLite
-  dataSourceParameters:
-    file: __DIR__/database_development
-
-debug: true
