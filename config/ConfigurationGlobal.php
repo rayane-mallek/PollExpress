@@ -4,12 +4,16 @@ namespace Config;
 
 use Symfony\Component\DependencyInjection\Reference;
 use TheFeed\Application\PublicationController;
+use TheFeed\Application\SondageController;
 use TheFeed\Business\Entity\Publication;
+use TheFeed\Business\Entity\Sondage;
 use TheFeed\Business\Entity\Utilisateur;
+use TheFeed\Business\Services\SondageService;
 use TheFeed\Storage\SQL\PublicationRepositorySQL;
 use TheFeed\Business\Services\PublicationService;
 use TheFeed\Business\Services\UtilisateurService;
 use TheFeed\Application\UtilisateurController;
+use TheFeed\Storage\SQL\SondageRepositorySQL;
 use TheFeed\Storage\SQL\UtilisateurRepositorySQL;
 
 class ConfigurationGlobal {
@@ -20,11 +24,13 @@ class ConfigurationGlobal {
     const repositories = [
         Publication::class => PublicationRepositorySQL::class,
         Utilisateur::class => UtilisateurRepositorySQL::class,
+        Sondage::class => SondageRepositorySQL::class,
     ];
 
     const controllers = [
         "publication_controller" => PublicationController::class,
         "utilisateur_controller" => UtilisateurController::class,
+        "sondage_controller" => SondageController::class,
     ];
 
     const routes = [
@@ -42,6 +48,21 @@ class ConfigurationGlobal {
             ],
             "methods" => ["POST"]
         ],
+        "app_submit_sondage" => [
+            "path" => '/sondage',
+            "parameters" => [
+                "_controller" => "sondage_controller::submitSondage",
+            ],
+            "methods" => ["POST"]
+        ],
+        "app_create_sondage" => [
+            "path" => '/create_sondage',
+            "parameters" => [
+                "_controller" => "sondage_controller::getCreateSondage",
+            ],
+            "methods" => ["GET"]
+        ],
+
         "app_inscription" => [
             "path" => '/inscription',
             "parameters" => [
@@ -100,6 +121,9 @@ class ConfigurationGlobal {
     {
         $container->register('publication_service', PublicationService::class)
             ->setArguments([$container->get('repository_manager')]);
+
+        $container->register('sondage_service', SondageService::class)
+            ->setArguments([$container->get('repository_manager'), new Reference('session_manager')]);
 
         $container->register('utilisateur_service', UtilisateurService::class)
             ->setArguments([$container->get('repository_manager'), '%salt%', '%profilePictures%', new Reference('session_manager')]);

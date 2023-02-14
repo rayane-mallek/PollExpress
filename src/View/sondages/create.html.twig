@@ -1,0 +1,21 @@
+   
+{% extends "base.html.twig" %}
+
+{% block page_title %}Connexion{% endblock %}
+
+{% block page_content %}
+ <main>
+     <form action="{{ route('app_submit_sondage') }}" id="form-access" class="center" method="post">
+         <fieldset>
+             <legend>Nouveau Sondage</legend>
+             <div class="access-container">
+                 <label for="titre">Titre</label>
+                 <input id="titre" style="color:black" type="text" name="titre"/>
+             </div>
+             <input id="access-submit" type="submit" value="Créer">
+         </fieldset>
+     </form>
+ </main>
+{% endblock %}
+   
+

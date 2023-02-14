@@ -11,8 +11,8 @@ class ConfigurationProduction extends ConfigurationGlobal {
         "manager" => RepositoryManagerMySQL::class,
         "dataSourceParameters" => [
             'hostname' => 'webinfo.iutmontp.univ-montp2.fr',
-            'database' => 'mallekr',
-            'login' => 'mallekr',
+            'database' => 'gaidot',
+            'login' => 'gaidot',
             'password' => 'root'
         ]
     ];
