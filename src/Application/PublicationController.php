@@ -11,8 +11,12 @@ class PublicationController extends Controller {
     public function feed()
     {   
         $publications = $this->containerInterface->get('publication_service')->getAllPublications();
+        $sondages = $this->containerInterface->get('sondage_service')->getAllSondages();
 
-        return $this->render('publications/feed.html.twig', [ 'publications' => $publications]);
+        return $this->render('publications/feed.html.twig', [
+            'publications' => $publications,
+            'sondages' => $sondages
+        ]);
     }
 
     public function submitFeedy(Request $request) 

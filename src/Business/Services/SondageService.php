@@ -44,14 +44,43 @@ class SondageService {
         $this->sondageRepository->create($sondage);
     }
 
-    public function getSondagesFrom(int $idUtilisateur)
+    public function voteOui(int $idSondage, int $idUtilisateur)
     {
-        $utilisateur = $this->sondageRepository->getPublicationsFrom($idUtilisateur);
+        $sondage = $this->sondageRepository->get($idSondage);
+        if (is_null($sondage)){
+            throw new ServiceException("Le sondage n'existe pas.");
+        }
+
+        $utilisateur = $this->utilisateurRepository->get($idUtilisateur);
         if (is_null($utilisateur)){
             throw new ServiceException("L'utilisateur n'existe pas.");
         }
 
-        return $this->sondageRepository->getPublicationsFrom($idUtilisateur);
+        $this->sondageRepository->voteOui($idSondage, $this->getUserId());
+    }
+
+    public function voteNon(int $idSondage, int $idUtilisateur)
+    {
+        $sondage = $this->sondageRepository->get($idSondage);
+        if (is_null($sondage)){
+            throw new ServiceException("Le sondage n'existe pas.");
+        }
+
+        $utilisateur = $this->utilisateurRepository->get($idUtilisateur);
+        if (is_null($utilisateur)){
+            throw new ServiceException("L'utilisateur n'existe pas.");
+        }
+        $this->sondageRepository->voteNon($idSondage, $this->getUserId());
+    }
+
+    public function getSondagesFrom(int $idUtilisateur)
+    {
+        $utilisateur = $this->sondageRepository->getSondagesFrom($idUtilisateur);
+        if (is_null($utilisateur)){
+            throw new ServiceException("L'utilisateur n'existe pas.");
+        }
+
+        return $this->sondageRepository->getSondagesFrom($idUtilisateur);
     }
 
     public function getUserId()

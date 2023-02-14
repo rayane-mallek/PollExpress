@@ -2,10 +2,8 @@
 
 namespace TheFeed\Storage\SQL;
 
-use DateTime;
 use Framework\Storage\Repository;
 use PDO;
-use TheFeed\Business\Entity\Publication;
 use TheFeed\Business\Entity\Sondage;
 use TheFeed\Business\Entity\Utilisateur;
 
@@ -22,7 +20,7 @@ class SondageRepositorySQL implements Repository
     {
         $sondages = [];
 
-        $query = $this->pdo->prepare("SELECT * FROM sondages s JOIN utilisateurs u ON u.idUtilisateur = s.idAuteur ORDER BY date DESC");
+        $query = $this->pdo->prepare("SELECT * FROM sondages s JOIN utilisateurs u ON u.idUtilisateur = s.idAuteur");
         $query->execute();
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -33,8 +31,8 @@ class SondageRepositorySQL implements Repository
             $utilisateur->setProfilePictureName($sondage["profilePictureName"]);
 
             $sdg = new Sondage();
-            $sdg->setIdSondage($sondage['idPublication']);
-            $sdg->setTitre($sondage['message']);
+            $sdg->setIdSondage($sondage['idSondage']);
+            $sdg->setTitre($sondage['titre']);
             $sdg->setUtilisateur($utilisateur);
 
             $sondages[] = $sdg;
@@ -52,7 +50,7 @@ class SondageRepositorySQL implements Repository
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
         $utilisateur = new Utilisateur();
-        $utilisateur->setIdUtilisateur($result['idAuteur']);
+        $utilisateur->setIdUtilisateur($result['idUtilisateur']);
         $utilisateur->setLogin($result["login"]);
         $utilisateur->setProfilePictureName($result["profilePictureName"]);
 
@@ -80,7 +78,7 @@ class SondageRepositorySQL implements Repository
     {
         $query = $this->pdo->prepare("DELETE FROM sondages WHERE idSondage = :id");
         $query->execute([
-            'id' => $sondage->getIdPublication()
+            'id' => $sondage->getIdSondage()
         ]);
     }
 
@@ -88,7 +86,7 @@ class SondageRepositorySQL implements Repository
     {
         $sondages = [];
 
-        $query = $this->pdo->prepare("SELECT * FROM sondages s JOIN utilisateurs u ON u.idUtilisateur = s.idAuteur WHERE idUtilisateur = :idUtilisateur ORDER BY date DESC");
+        $query = $this->pdo->prepare("SELECT * FROM sondages s JOIN utilisateurs u ON u.idUtilisateur = s.idAuteur WHERE idUtilisateur = :idUtilisateur");
         $query->execute([
             'idUtilisateur' => $idUtilisateur
         ]);
@@ -101,8 +99,8 @@ class SondageRepositorySQL implements Repository
             $utilisateur->setProfilePictureName($sondage["profilePictureName"]);
 
             $sdg = new Sondage();
-            $sdg->setIdSondage($sondage['idPublication']);
-            $sdg->setTitre($sondage['message']);
+            $sdg->setIdSondage($sondage['idSondage']);
+            $sdg->setTitre($sondage['titre']);
             $sdg->setUtilisateur($utilisateur);
 
             $sondages[] = $sdg;
@@ -110,4 +108,45 @@ class SondageRepositorySQL implements Repository
 
         return $sondages;
     }
+
+    public function getNbOui(int $idSondage) : int
+    {
+        $query = $this->pdo->prepare("SELECT COUNT(*) FROM votes WHERE idSondage = :idSondage AND choix = true");
+        $query->execute([
+            'idSondage' => $idSondage
+        ]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $result['COUNT(*)'];
+    }
+
+    public function getNbNon(int $idSondage) : int
+    {
+        $query = $this->pdo->prepare("SELECT COUNT(*) FROM votes WHERE idSondage = :idSondage AND choix = false");
+        $query->execute([
+            'idSondage' => $idSondage
+        ]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $result['COUNT(*)'];
+    }
+
+    public function voteOui(int $idSondage, int $idUtilisateur)
+    {
+        $query = $this->pdo->prepare("INSERT INTO votes (idSondage, idVotant, choix) VALUES (:idSondage, :idUtilisateur, true)");
+        $query->execute([
+            'idSondage' => $idSondage,
+            'idUtilisateur' => $idUtilisateur
+        ]);
+    }
+
+    public function voteNon(int $idSondage, int $idUtilisateur)
+    {
+        $query = $this->pdo->prepare("INSERT INTO votes (idSondage, idVotant, choix) VALUES (:idSondage, :idUtilisateur, false)");
+        $query->execute([
+            'idSondage' => $idSondage,
+            'idUtilisateur' => $idUtilisateur
+        ]);
+    }
+
 }

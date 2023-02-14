@@ -14,6 +14,7 @@
               {%  if session.get('id') %}
                 <a href="{{ route("app_page_perso", {"idUtilisateur": session.get('id')}) }}">Ma page</a>
                   <a href="{{ route("app_create_sondage") }}">Créer un sondage</a>
+                  <a href="{{ route("app_list_sondages") }}">Voir les sondages</a>
                   <a href="{{ route("app_submit_deconnexion") }}">Déconnexion</a>
               {% else %}
                 <a href="{{ route("app_inscription") }}">Inscription</a>

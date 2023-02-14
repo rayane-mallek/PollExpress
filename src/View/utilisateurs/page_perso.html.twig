@@ -5,7 +5,30 @@
 {% block page_content %}
     <main id="the-feed-main">
         <div id="feed">
+
+            {% if sondages %}
+                <p id="no-publications" class="center">Mes sondages :</p>
+
+                {% for sondage in sondages %}
+                    <div class="feedy">
+                        <div class="feedy-header">
+                            <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ sondage.getUtilisateur().getProfilePictureName()) }}" alt="avatar de l'utilisateur">
+                            <div class="feedy-info">
+                                <span>{{ sondage.getUtilisateur().getLogin() }}</span>
+                                <p>Titre du sondage : {{ sondage.getTitre() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p id="no-publications" class="center">Pas de sondages pour le moment</p>
+            {% endif %}
+
+
+
             {% if publications %}
+                <p id="no-publications" class="center">Mes feedies</p>
+
                 {% for publication in publications %}
                     <div class="feedy">
                         <div class="feedy-header">
@@ -22,6 +45,10 @@
             {% else %}
                 <p id="no-publications" class="center">Pas de publications pour le moment!</p>
             {% endif %}
+
+
+
+
         </div>
     </main>
 {% endblock page_content %}

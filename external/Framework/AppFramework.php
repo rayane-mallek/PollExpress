@@ -50,9 +50,9 @@ class AppFramework
       } catch (ResourceNotFoundException $exception) {
             $response = new Response("Page introuvable!", 404);
       } catch (Exception $exception) {
-            $response = new Response("Erreur : {$exception->getMessage()}", 500);
+            $response = new Response("Erdreur : {$exception }", 500);
       }
-      
+
       return $response;
    }
 }

@@ -71,10 +71,12 @@ class UtilisateurController extends Controller {
         try {
             $publications = $this->containerInterface->get('publication_service')->getPublicationsFrom($idUtilisateur);
             $utilisateur = $this->containerInterface->get('utilisateur_service')->getUtilisateur($idUtilisateur);
+            $sondages = $this->containerInterface->get('sondage_service')->getSondagesFrom($idUtilisateur);
 
             return $this->render('utilisateurs/page_perso.html.twig', [
                 'publications' => $publications,
-                'utilisateur'  => $utilisateur
+                'utilisateur'  => $utilisateur,
+                'sondages' => $sondages
             ]);
         } catch (ServiceException $exception) {
             throw new ResourceNotFoundException();

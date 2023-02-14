@@ -55,10 +55,35 @@ class ConfigurationGlobal {
             ],
             "methods" => ["POST"]
         ],
+        "app_sondage_oui" => [
+            "path" => '/sondage/oui/{idSondage}/{idUtilisateur}',
+            "parameters" => [
+                "_controller" => "sondage_controller::voteOui",
+                "idSondage" => null,
+                "idUtilisateur" => 1
+            ],
+            "methods" => ["GET"]
+        ],
+        "app_sondage_non" => [
+            "path" => '/non/{idSondage}/{idUtilisateur}',
+            "parameters" => [
+                "_controller" => "sondage_controller::voteNon",
+                "idSondage" => null,
+                "idUtilisateur" => 1
+            ],
+            "methods" => ["GET"]
+        ],
         "app_create_sondage" => [
             "path" => '/create_sondage',
             "parameters" => [
                 "_controller" => "sondage_controller::getCreateSondage",
+            ],
+            "methods" => ["GET"]
+        ],
+        "app_list_sondages" => [
+            "path" => '/sondages',
+            "parameters" => [
+                "_controller" => "sondage_controller::listSondages",
             ],
             "methods" => ["GET"]
         ],
