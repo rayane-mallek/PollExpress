@@ -9,7 +9,7 @@ Une application de vote de sondages lancés par des utilisateurs.
 
 
 ### Features du site
-- [ ] Gestion des utilisateurs (inscription, connexion et déconnexion)
+- [x] Gestion des utilisateurs (inscription, connexion et déconnexion)
 - [ ] Voir les sondages
 - [ ] Poster un sondage (si on est connecté)
 - [ ] Voter à un sondage (en étant connecté)
