@@ -12,6 +12,7 @@ use Symfony\Component\Routing\RequestContext;
 use Framework\AppFramework;
 use Framework\Listener\FrameworkListener;
 use Framework\Service\ServerSessionManager;
+use Framework\Service\PdfGenerator;
 use Framework\Twig\Extension\TwigAppFrameworkExtension;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -23,7 +24,7 @@ use Twig\Loader\FilesystemLoader;
 class AppInitializer {
 
     public function initializeApplication($configurationClass)
-    {   
+    {
         $routes = new RouteCollection();
 
         $container = new ContainerBuilder();
@@ -35,17 +36,20 @@ class AppInitializer {
 
         $container->register('event_dispatcher', EventDispatcher::class)
             ->addMethodCall('addSubscriber', [new Reference('framework_listener')]);
-        
+
+        $container->register('session_manager', ServerSessionManager::class);
+
+        $container->register('pdf_generator', PdfGenerator::class);
+
         $container->register('framework_listener', FrameworkListener::class)
             ->setArguments([ new Reference('session_manager') ])
-            ->setArgument('twig', new Reference('twig'));
+            ->setArgument('twig', new Reference('twig'))
+            ->setArgument('pdfGenerator', new Reference('pdf_generator'));
 
         foreach ($configurationClass::listeners as $listener) {
             $container->getDefinition('event_dispatcher')
                 ->addMethodCall('addSubscriber', [ new Reference($listener) ]);
         }
-
-        $container->register('session_manager', ServerSessionManager::class);
 
         $container->register('argument_resolver', ArgumentResolver::class);
         $container->register('framework', AppFramework::class)
@@ -58,21 +62,21 @@ class AppInitializer {
 
         $container->register('url_generator', UrlGenerator::class)
             ->setArguments([ $routes, new Reference('context') ]);
-        
-        
+
+
         /* Twig */
         $views = $configurationClass::appRoot . '/' . $configurationClass::views;
         $twigLoader = new FilesystemLoader($views);
         $container->register('twig', Environment::class)
             ->setArguments([ $twigLoader, ["autoescape" => "html"] ])
             ->addMethodCall('addExtension', [new Reference('twig_app_framework_extension')]);
-        
+
         /* Repository Manager */
         $repositoryManager = $configurationClass::repositoryManager;
         $container->register('repository_manager', $repositoryManager['manager'])
             ->setArguments([$repositoryManager['dataSourceParameters']])
             ->addMethodCall('registerRepositories', [$configurationClass::repositories]);
-        
+
         /* Controllers */
         foreach($configurationClass::controllers as $key => $value) {
             $container->register($key, $value)

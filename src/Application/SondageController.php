@@ -48,4 +48,14 @@ class SondageController extends Controller {
         return $this->redirectToRoute('app_list_sondages');
     }
 
+    public function export(int $idSondage)
+    {
+        $html = $this->containerInterface->get('twig')->render('sondages/sondage.html.twig', [
+            'sondage' => $this->containerInterface->get('sondage_service')->getSondage($idSondage)->getIdSondage(),
+        ]);
+        $this->containerInterface->get('pdf_generator')->generate($html);
+
+        return $this->redirectToRoute('app_list_sondages');
+    }
+
 }

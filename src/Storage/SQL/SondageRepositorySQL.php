@@ -54,7 +54,7 @@ class SondageRepositorySQL implements Repository
         $utilisateur->setLogin($result["login"]);
         $utilisateur->setProfilePictureName($result["profilePictureName"]);
 
-        return Sondage::create($result['titre'], $utilisateur);
+        return Sondage::create($result['titre'], $utilisateur, $result['idSondage']);
     }
 
     public function create($sondage) {

@@ -20,7 +20,10 @@ class SondageService {
         $this->sondageRepository = $repositoryManager->getRepository(Sondage::class);
         $this->utilisateurRepository = $repositoryManager->getRepository(Utilisateur::class);
         $this->sessionManager = $sessionManager;
+    }
 
+    public function getSondage(int $id) {
+        return $this->sondageRepository->get($id);
     }
 
     public function getAllSondages()

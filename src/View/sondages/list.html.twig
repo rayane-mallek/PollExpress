@@ -7,21 +7,11 @@
   <div id="feed">
         <h1>Sondages en cours :</h1>
 
-      {%  if sondages %}
+      {% if sondages %}
           {% for sondage in sondages %}
-              <div class="feedy">
-                  <div class="feedy-header">
-                      <a href="{{ route("app_page_perso", {"idUtilisateur": sondage.getUtilisateur().getIdUtilisateur()}) }}">
-                          <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ sondage.getUtilisateur().getProfilePictureName()) }}" alt="avatar de l'utilisateur">
-                      </a>
-                      <div class="feedy-info">
-                          <span>{{ sondage.getUtilisateur().getLogin() }}</span>
-                          <p>{{ sondage.getTitre() }}</p>
-                          <a href="{{ route("app_sondage_oui", {"idSondage": sondage.getIdSondage()}) }}"><button>Oui</button></a>
-                          <a href="{{ route("app_sondage_non", {"idSondage": sondage.getIdSondage()}) }}"><button>Non</button></a>
-                      </div>
-                  </div>
-              </div>
+              {% include 'sondages/sondage.html.twig' with {
+                sondage: sondage,
+              } %}
           {% endfor %}
       {% else %}
           <p id="no-publications" class="center">Pas de sondages pour le moment!</p>
