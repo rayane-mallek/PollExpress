@@ -16,7 +16,7 @@ abstract class Controller {
     }
 
     public function render($twigPath, $arguments)
-    {   
+    {
         $content = $this->containerInterface->get('twig')->render($twigPath, $arguments);
 
         return new Response($content, Response::HTTP_OK);
@@ -30,7 +30,7 @@ abstract class Controller {
     }
 
     public function redirectTo(string $url)
-    {   
+    {
         return new RedirectResponse($url);
     }
 

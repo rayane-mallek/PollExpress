@@ -13,6 +13,7 @@ use Framework\AppFramework;
 use Framework\Listener\FrameworkListener;
 use Framework\Service\ServerSessionManager;
 use Framework\Service\PdfGenerator;
+use Framework\Service\Translator;
 use Framework\Twig\Extension\TwigAppFrameworkExtension;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -40,6 +41,12 @@ class AppInitializer {
         $container->register('session_manager', ServerSessionManager::class);
 
         $container->register('pdf_generator', PdfGenerator::class);
+
+        $container->register('translator', Translator::class)
+            ->setArguments([
+                $configurationClass::defaultLanguage,
+                $configurationClass::translations
+            ]);
 
         $container->register('framework_listener', FrameworkListener::class)
             ->setArguments([ new Reference('session_manager') ])

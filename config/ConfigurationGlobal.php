@@ -21,6 +21,10 @@ class ConfigurationGlobal {
 
     const views = "View";
 
+    const translations = "Translation";
+
+    const defaultLanguage = "fr_FR";
+
     const repositories = [
         Publication::class => PublicationRepositorySQL::class,
         Utilisateur::class => UtilisateurRepositorySQL::class,
