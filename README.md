@@ -4,7 +4,7 @@ Une application de vote de sondages lancés par des utilisateurs.
 
 ### Améliorations du framework :
 - [ ] Ajout d'un ORM (Doctrine)
-- [ ] Ajout d'un mailer (Symfony Mailer)
+- [ ] Ajout de traductions
 - [x] Ajout d'un service pour générer des PDF (https://github.com/dompdf/dompdf)
 
 
