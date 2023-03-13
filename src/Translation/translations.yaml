@@ -1,0 +1,9 @@
+fr:
+  homepage: Accueil
+  sondage:
+    create: Créer un sondage
+  watch: Voir les sondages
+  my_account: Ma page
+  signin: Connexion
+  signout: Déconnexion
+  register: Inscription

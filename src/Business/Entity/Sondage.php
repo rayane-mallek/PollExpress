@@ -58,11 +58,12 @@ class Sondage {
         $this->titre = $titre;
     }
 
-    public static function create(string $titre, Utilisateur $utilisateur)
+    public static function create(string $titre, Utilisateur $utilisateur, ?int $idSondage = null)
     {
         $sondage = new Sondage();
         $sondage->setTitre($titre);
         $sondage->setUtilisateur($utilisateur);
+        $sondage->setIdSondage($idSondage);
 
         return $sondage;
     }

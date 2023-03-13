@@ -21,6 +21,10 @@ class ConfigurationGlobal {
 
     const views = "View";
 
+    const translations = __DIR__ . "/../src/Translation/translations.yaml";
+
+    const defaultLanguage = "fr";
+
     const repositories = [
         Publication::class => PublicationRepositorySQL::class,
         Utilisateur::class => UtilisateurRepositorySQL::class,
@@ -70,6 +74,14 @@ class ConfigurationGlobal {
                 "_controller" => "sondage_controller::voteNon",
                 "idSondage" => null,
                 "idUtilisateur" => 1
+            ],
+            "methods" => ["GET"]
+        ],
+        "app_sondage_export" => [
+            "path" => '/export/{idSondage}',
+            "parameters" => [
+                "_controller" => "sondage_controller::export",
+                "idSondage" => null,
             ],
             "methods" => ["GET"]
         ],
@@ -142,7 +154,7 @@ class ConfigurationGlobal {
         'framework_listener'
     ];
 
-    public static function services($container) 
+    public static function services($container)
     {
         $container->register('publication_service', PublicationService::class)
             ->setArguments([$container->get('repository_manager')]);
