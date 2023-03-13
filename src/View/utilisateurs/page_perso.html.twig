@@ -1,27 +1,27 @@
 {% extends "base.html.twig" %}
 
-{% block page_title %}Page de {{ utilisateur.getLogin() }}{% endblock page_title %}
+{% block page_title %}{{ trans('page_of')}} {{ utilisateur.getLogin() }}{% endblock page_title %}
 
 {% block page_content %}
     <main id="the-feed-main">
         <div id="feed">
 
             {% if sondages %}
-                <p id="no-publications" class="center">Mes sondages :</p>
+                <p id="no-publications" class="center">{{ trans('my_sondages')}}</p>
 
                 {% for sondage in sondages %}
                     <div class="feedy">
                         <div class="feedy-header">
-                            <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ sondage.getUtilisateur().getProfilePictureName()) }}" alt="avatar de l'utilisateur">
+                            <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ sondage.getUtilisateur().getProfilePictureName()) }}" alt="{{ trans('user_avatar')}}">
                             <div class="feedy-info">
                                 <span>{{ sondage.getUtilisateur().getLogin() }}</span>
-                                <p>Titre du sondage : {{ sondage.getTitre() }}</p>
+                                <p>{{ trans('sondage_title')}} : {{ sondage.getTitre() }}</p>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             {% else %}
-                <p id="no-publications" class="center">Pas de sondages pour le moment</p>
+                <p id="no-publications" class="center">{{ trans('no_sondage')}}</p>
             {% endif %}
 
         </div>

@@ -1,14 +1,14 @@
 <div class="feedy">
     <div class="feedy-header">
         <a href="{{ route("app_page_perso", {"idUtilisateur": sondage.getUtilisateur().getIdUtilisateur()}) }}">
-            <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ sondage.getUtilisateur().getProfilePictureName()) }}" alt="avatar de l'utilisateur">
+            <img class="avatar" src=" {{ asset('img/utilisateurs/' ~ sondage.getUtilisateur().getProfilePictureName()) }}" alt="{{ trans('user_avatar')}}">
         </a>
         <div class="feedy-info">
             <span>{{ sondage.getUtilisateur().getLogin() }}</span>
             <p>{{ sondage.getTitre() }}</p>
-            <a href="{{ route("app_sondage_oui", {"idSondage": sondage.getIdSondage()}) }}"><button>Oui</button></a>
-            <a href="{{ route("app_sondage_non", {"idSondage": sondage.getIdSondage()}) }}"><button>Non</button></a>
-            <a href="{{ route("app_sondage_export", {"idSondage": sondage.getIdSondage()}) }}"><button>Exporter</button></a>
+            <a href="{{ route("app_sondage_oui", {"idSondage": sondage.getIdSondage()}) }}"><button>{{ trans('yes')}}</button></a>
+            <a href="{{ route("app_sondage_non", {"idSondage": sondage.getIdSondage()}) }}"><button>{{ trans('no')}}</button></a>
+            <a href="{{ route("app_sondage_export", {"idSondage": sondage.getIdSondage()}) }}"><button>{{ trans('export')}}</button></a>
         </div>
     </div>
 </div>

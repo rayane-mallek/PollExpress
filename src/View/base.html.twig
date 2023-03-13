@@ -12,11 +12,11 @@
         <nav>
               <a href="{{ route("app_feed") }}">{{ trans('homepage')}}</a>
               {%  if session.get('id') %}
-                  <a href="{{ route("app_create_sondage") }}">{{ trans('sondage.create')}}</a>
+                  <a href="{{ route("app_create_sondage") }}">{{ trans('sondage_create')}}</a>
                   <a href="{{ route("app_page_perso", {"idUtilisateur": session.get('id')}) }}">{{ trans('my_account')}}</a>
                   <a href="{{ route("app_submit_deconnexion") }}">{{ trans('signout')}}</a>
               {% else %}
-                  <a href="{{ route("app_list_sondages") }}">{{ trans('watch')}}</a>
+                  <a href="{{ route("app_list_sondages") }}">{{ trans('sondage_watch')}}</a>
                   <a href="{{ route("app_inscription") }}">{{ trans('register')}}</a>
                 <a href="{{ route("app_connexion") }}">{{ trans('signin')}}</a>
               {% endif %}

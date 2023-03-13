@@ -1,11 +1,11 @@
 {% extends "base.html.twig" %}
 
-{% block page_title %}The Feed{% endblock page_title %}
+{% block page_title %}{{ trans('the_feed')}}{% endblock page_title %}
 {% block page_content %}
 
 <main id="the-feed-main">
   <div id="feed">
-        <h1>Sondages en cours :</h1>
+        <h1>{{ trans('current_sondages')}}</h1>
 
       {% if sondages %}
           {% for sondage in sondages %}
@@ -14,7 +14,7 @@
               } %}
           {% endfor %}
       {% else %}
-          <p id="no-publications" class="center">Pas de sondages pour le moment!</p>
+          <p id="no-publications" class="center">{{ trans('no_sondage')}}</p>
       {% endif %}
 
   </div>

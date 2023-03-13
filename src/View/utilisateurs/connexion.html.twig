@@ -1,22 +1,22 @@
    
 {% extends "base.html.twig" %}
 
-{% block page_title %}Connexion{% endblock %}
+{% block page_title %}{{ trans('signin')}}{% endblock %}
 
 {% block page_content %}
  <main>
      <form action="{{ route('app_submit_connexion') }}" id="form-access" class="center" method="post">
          <fieldset>
-             <legend>Connexion</legend>
+             <legend>{{ trans('signin')}}</legend>
              <div class="access-container">
-                 <label for="login">Login</label>
+                 <label for="login">{{ trans('login')}}</label>
                  <input id="login" type="text" name="login" required/>
              </div>
              <div class="access-container">
-                 <label for="password">Mot de passe</label>
+                 <label for="password">{{ trans('password')}}</label>
                  <input id="password" type="password" name="password" required/>
              </div>
-             <input id="access-submit" type="submit" value="Se connecter">
+             <input id="access-submit" type="submit" value="{{ trans('signin')}}">
          </fieldset>
      </form>
  </main>

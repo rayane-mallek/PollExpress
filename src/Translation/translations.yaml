@@ -1,9 +1,27 @@
 fr:
   homepage: Accueil
-  sondage:
-    create: Créer un sondage
-  watch: Voir les sondages
+  sondage_create: Créer un sondage
+  sondage_watch: Voir les sondages
   my_account: Ma page
   signin: Connexion
   signout: Déconnexion
   register: Inscription
+  login: Nom d'utilisateur
+  password: Mot de passe
+  my_sondages: Mes sondages
+  user_avatar: Avatar de l'utilisateur
+  sondage_title: Titre du sondage
+  no_sondage: Pas de sondage pour le moment
+  page_of: Page de 
+  login_characters: Entre 4 et 20 caractères
+  password_characters: Entre 8 et 20 caractères, au moins une minuscule, une majuscule et un nombre
+  mail: Adresse mail
+  profile_picture: Photo de profil
+  new_sondage: Nouveau sondage
+  title: Titre
+  create: Créer
+  the_feed: The Feed
+  current_sondages: "Sondages en cours :"
+  yes: Oui
+  no: Non
+  export: Exporter
