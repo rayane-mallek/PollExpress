@@ -10,7 +10,7 @@
     <div id="titre" class="center">
         <a href="{{route('app_feed')}}"><span>The Feed</span></a>
         <nav>
-              <a href="{{ route("app_feed") }}">Accueil</a>
+              <a href="{{ route("app_feed") }}">{{ trans('homepage')}}</a>
               {%  if session.get('id') %}
                   <a href="{{ route("app_create_sondage") }}">Créer un sondage</a>
                   <a href="{{ route("app_page_perso", {"idUtilisateur": session.get('id')}) }}">Ma page</a>

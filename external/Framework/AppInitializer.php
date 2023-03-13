@@ -95,7 +95,8 @@ class AppInitializer {
             ->setArguments([
                 new Reference('context'),
                 new Reference('url_generator'),
-                $configurationClass::debug
+                $configurationClass::debug,
+                new Reference('translator')
             ]);
 
         /* Routes */

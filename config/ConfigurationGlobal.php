@@ -21,9 +21,9 @@ class ConfigurationGlobal {
 
     const views = "View";
 
-    const translations = "Translation";
+    const translations = __DIR__ . "/../src/Translation/translations.yaml";
 
-    const defaultLanguage = "fr_FR";
+    const defaultLanguage = "fr";
 
     const repositories = [
         Publication::class => PublicationRepositorySQL::class,
